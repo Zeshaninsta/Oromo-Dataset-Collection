@@ -4,7 +4,11 @@ import csv
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+CORS_ALLOWED_ORIGINS = [
+    "https://orodataset.onrender.com/",
+]
 # File path
 DATASET_FILE = 'dataset/dataset.csv'
 
@@ -41,4 +45,4 @@ def add_data():
     return jsonify({"message": "Data added successfully"}), 201
 
 if __name__ == '__main__':
-    app.run(debug=True)
+     app.run(host="0.0.0.0", port=10000, debug=False)
