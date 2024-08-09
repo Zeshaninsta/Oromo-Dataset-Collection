@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Home = () => {
   const [datasetCount, setDatasetCount] = useState(0);
   const [incorrect, setIncorrect] = useState('');
   const [correct, setCorrect] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fetch dataset count on component mount
   useEffect(() => {
@@ -20,6 +24,12 @@ const Home = () => {
   }, []);
 
   const handleAddToDataset = async () => {
+    if (!incorrect || !correct) {
+      toast.error('You should add data to both fields.');
+      return; // Exit the function if inputs are not valid
+    }
+
+    setIsSubmitting(true); // Disable the button when clicked
     try {
       await axios.post('https://orodataset-backend.onrender.com/api/add-data', {
         original_text: incorrect,
@@ -33,8 +43,15 @@ const Home = () => {
       // Clear input fields
       setIncorrect('');
       setCorrect('');
+
+      // Show success toast
+      toast.success('Data added successfully!');
     } catch (error) {
       console.error("Error adding data to dataset", error);
+      // Show error toast
+      toast.error('Failed to add data. Please try again.');
+    } finally {
+      setIsSubmitting(false); // Re-enable the button after submission
     }
   };
 
@@ -53,11 +70,11 @@ const Home = () => {
         <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-brown-900 text-center mb-6">
           Baga Nagaan Dhuftan
         </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl text-brown-700 mb-8 text-center">
+        <p className="text-xl md:text-2xl lg:text-3xl text-brown-700 mb-2 text-center font-poppins">
           Galma Qoranno Dataa Afaan Oromoo
         </p>
-        <p className="text-lg md:text-xl lg:text-2xl text-brown-600 mb-8 text-center">
-          Dataset Count: <span className="font-bold">{datasetCount}</span>
+        <p className="text-lg md:text-xl lg:text-2xl text-brown-600 mb-8 text-center font-sedan">
+          Added Dataset: <span className="font-bold font-sedan">{datasetCount}</span>
         </p>
         <div className="w-full lg:w-2/3 xl:w-1/2 bg-white rounded-lg shadow-lg p-8 relative z-20">
           <p className="text-xl font-semibold text-brown-700 mb-4">
@@ -96,14 +113,15 @@ const Home = () => {
                 placeholder="Jechoota Sirrii"
                 value={correct}
                 onChange={(e) => setCorrect(e.target.value)}
-                className="bg-gray-200 text-gray-800 p-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="bg-gray-200 text-gray-800 p-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-yellow-500 "
               />
             </div>
             <button
-              className="w-full mt-6 bg-blue-600 hover:bg-brown-700 text-white font-bold py-4 rounded-lg transition duration-300"
+              className={`w-full mt-6 ${isSubmitting ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold py-4 rounded-lg transition duration-300 text-2xl`}
               onClick={handleAddToDataset}
+              disabled={isSubmitting} // Disable the button while submitting
             >
-              Gara Datasetitti Dabaluu
+              {isSubmitting ? 'Adding...' : 'Add to Dataset'}
             </button>
             <button
               className='w-full bg-green-500 hover:bg-green-600 duration-500 p-4 cursor-pointer text-white text-2xl font-bold mt-4'
@@ -114,6 +132,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
