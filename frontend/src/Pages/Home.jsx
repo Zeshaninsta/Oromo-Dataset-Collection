@@ -9,7 +9,7 @@ const Home = () => {
   useEffect(() => {
     const fetchDatasetCount = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/dataset-count');
+        const response = await axios.get('https://orodataset-backend.onrender.com/api/dataset-count');
         setDatasetCount(response.data.count);
       } catch (error) {
         console.error("Error fetching dataset count", error);
@@ -21,13 +21,13 @@ const Home = () => {
 
   const handleAddToDataset = async () => {
     try {
-      await axios.post('http://localhost:5000/api/add-data', {
+      await axios.post('https://orodataset-backend.onrender.com/api/add-data', {
         original_text: incorrect,
         corrected_text: correct
       });
 
       // Update dataset count after adding new data
-      const response = await axios.get('http://localhost:5000/api/dataset-count');
+      const response = await axios.get('https://orodataset-backend.onrender.com/api/dataset-count');
       setDatasetCount(response.data.count);
 
       // Clear input fields
@@ -39,7 +39,7 @@ const Home = () => {
   };
 
   const handleDownload = () => {
-    window.location.href = 'http://localhost:5000/api/download-dataset';
+    window.location.href = 'https://orodataset-backend.onrender.com/api/download-dataset';
   };
 
   return (
