@@ -26,11 +26,12 @@ A web application designed to collect and manage a dataset for the Afaan Oromoo 
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/yourusername/Oromo-Dataset-Collection.git
-   cd Oromo-Dataset-Collection
+```bash
+git clone https://github.com/yourusername/Oromo-Dataset-Collection.git
+cd Oromo-Dataset-Collection
 ```
 2. **Install frontend dependencies:**
+
 ```bash
 cd frontend
 npm install
