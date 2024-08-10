@@ -98,7 +98,7 @@ const Home = () => {
           </div>
           <div className="mt-8">
             <h3 className="text-2xl font-semibold text-brown-700 mb-4 text-center">
-              Jechoota Keessan Dabaluu
+              Jechoota Keessan Dabalaa
             </h3>
             <div className="flex flex-col md:flex-row gap-4">
               <input
