@@ -66,7 +66,7 @@ const Home = () => {
         <div className="w-[1000px] h-[1000px] bg-[url('https://example.com/oromo-pattern.png')] opacity-20 blur-sm"></div>
       </div>
 
-      <div className="w-full flex flex-col justify-center items-center mt-20 px-4 lg:px-0 z-10">
+      <div className="w-full flex flex-col justify-center items-center mt-10 lg:mt-20 px-4 lg:px-0 z-10">
         <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-brown-900 text-center mb-6">
           Baga Nagaan Dhuftan
         </h1>
