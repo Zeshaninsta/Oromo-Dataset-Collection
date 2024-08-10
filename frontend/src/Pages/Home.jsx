@@ -70,7 +70,7 @@ const Home = () => {
         <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-brown-900 text-center mb-6">
           Baga Nagaan Dhuftan
         </h1>
-        <p className="text-xl md:text-2xl lg:text-3xl text-brown-700 mb-2 text-center font-poppins">
+        <p className="text-xl md:text-2xl lg:text-3xl text-brown-700 mb-2 text-center font-rubik font-bold">
           Galma Qoranno Dataa Afaan Oromoo
         </p>
         <p className="text-lg md:text-xl lg:text-2xl text-brown-600 mb-8 text-center font-sedan">
